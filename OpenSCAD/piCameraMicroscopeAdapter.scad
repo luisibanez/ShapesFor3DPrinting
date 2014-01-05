@@ -40,7 +40,7 @@ module piCameraMicroscopeAdapter()
 	}
 
 	module microscopeAdapter() {
-		clearance = 1;
+		clearance = 0.5;
 		inDiameter = 28+clearance;
 		exDiameter = 36;
 		cylindricAdapter(r_from_dia(inDiameter),r_from_dia(exDiameter),height=20);
@@ -58,20 +58,24 @@ module piCameraMicroscopeAdapter()
 	}
 
 	module chipOpening() {
-		c = 2;
+		clearance = 1.0;
+		c = 2 * clearance;
 		translate([0,-9.5,0])
 			cube(size=[8+c,10+c,4],center=true);
 	}
 
 	module lensOpening() {
-		c = 2;
+		clearance = 0.5;
+		c = 2 * clearance;
 		translate([0,0,-2.5])
 			cube(size=[8+c,8+c,5], center=true);
 	}
 
 	module boardOpening() {
+		clearance = 0.5;
+		c = 2 * clearance;
 		translate([0,-3,2.5])
-			cube(size=[25,25,5], center=true);
+			cube(size=[25+c,24+c,5], center=true);
 	}
 
 	module cameraFrame() {
