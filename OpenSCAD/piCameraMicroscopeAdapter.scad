@@ -4,8 +4,8 @@ module piCameraMicroscopeAdapter()
 	function midValue(a,b) = ( a + b ) / 2;
 
 	union() {
-//		piCameraAdapter();
-		piCameraBackCover(0.1);
+		piCameraAdapter();
+		piCameraBackCover(0.0);
 //		microscopeAdapter();
 //		telescopeAdapter();
 	}
@@ -40,30 +40,43 @@ module piCameraMicroscopeAdapter()
 		}
 	}
 
+	module piCameraBackCoverBevel(clearance) {
+		c = clearance;
+		hw = ( 25 / 2 ) + c;
+		he = hw + 1.0;
+		polyhedron
+			(points = [
+				[ hw, -15, -1 ],
+				[ hw,  15, -1 ], 
+				[ hw,  15,  1 ], 
+				[ hw, -15,  1 ],
+				[ he, -15, -1 ],
+				[ he,  15, -1 ] 
+				], 
+			triangles = [
+				[ 0, 1, 4 ],
+				[ 1, 5, 4 ],
+				[ 0, 4, 3 ],
+				[ 1, 2, 5 ],
+				[ 2, 3, 4 ],
+				[ 2, 4, 5 ]
+			]
+		);
+	}
+
+	module piCameraBackCoverBevels(clearance) {
+		union() {
+			piCameraBackCoverBevel(clearance);
+			mirror([1,0,0])
+				piCameraBackCoverBevel(clearance);
+		}
+	}
+
 	module piCameraBackCover(clearance) {
 		c = clearance;
-		hw = ( 25 + c ) / 2;
-		he = hw + 1.5;
 		translate([0,-5.5,24])
 			union() {
-				polyhedron
-					(points = [
-						[ hw, -15, -1 ],
-						[ hw,  15, -1 ], 
-						[ hw,  15,  1 ], 
-						[ hw, -15,  1 ],
-						[ he, -15, -1 ],
-						[ he,  15, -1 ] 
-					], 
-				     triangles = [
-						[ 0, 1, 4 ],
-						[ 1, 5, 4 ],
-						[ 0, 4, 3 ],
-						[ 1, 2, 5 ],
-						[ 2, 3, 4 ],
-						[ 2, 4, 5 ]
-					]
-					);
+				piCameraBackCoverBevels(clearance);
 				difference() {
 					cube(size=[25+c,30,2],center=true);
 					translate([0,12,0])
@@ -127,7 +140,7 @@ module piCameraMicroscopeAdapter()
 					chipOpening();
 				}
 			snaps(16,0.2);
-			piCameraBackCover(-0.2);		
+			piCameraBackCover(0.5);
 		}
 	}
 
