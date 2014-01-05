@@ -4,7 +4,8 @@ module piCameraMicroscopeAdapter()
 	function midValue(a,b) = ( a + b ) / 2;
 
 	union() {
-		piCameraAdapter();
+//		piCameraAdapter();
+		piCameraBackCover(0.1);
 //		microscopeAdapter();
 //		telescopeAdapter();
 	}
@@ -37,6 +38,38 @@ module piCameraMicroscopeAdapter()
 
 				snaps(midRadius,-0.2);
 		}
+	}
+
+	module piCameraBackCover(clearance) {
+		c = clearance;
+		hw = ( 25 + c ) / 2;
+		he = hw + 1.5;
+		translate([0,-5.5,24])
+			union() {
+				polyhedron
+					(points = [
+						[ hw, -15, -1 ],
+						[ hw,  15, -1 ], 
+						[ hw,  15,  1 ], 
+						[ hw, -15,  1 ],
+						[ he, -15, -1 ],
+						[ he,  15, -1 ] 
+					], 
+				     triangles = [
+						[ 0, 1, 4 ],
+						[ 1, 5, 4 ],
+						[ 0, 4, 3 ],
+						[ 1, 2, 5 ],
+						[ 2, 3, 4 ],
+						[ 2, 4, 5 ]
+					]
+					);
+				difference() {
+					cube(size=[25+c,30,2],center=true);
+					translate([0,12,0])
+						cube(size=[20,7,2],center=true);
+				}
+			}
 	}
 
 	module microscopeAdapter() {
@@ -94,8 +127,9 @@ module piCameraMicroscopeAdapter()
 					chipOpening();
 				}
 			snaps(16,0.2);
+			piCameraBackCover(-0.2);		
+		}
 	}
-  }
 
 }
 
