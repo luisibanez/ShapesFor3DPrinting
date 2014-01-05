@@ -1,7 +1,7 @@
 module piCameraMicroscopeAdapter() 
 {
 	function r_from_dia(d) = d / 2;
-   function midValue(a,b) = ( a + b ) / 2;
+	function midValue(a,b) = ( a + b ) / 2;
 
 	union() {
 		piCameraAdapter();
@@ -31,16 +31,16 @@ module piCameraMicroscopeAdapter()
 		union() {
 			translate([0,0,5])
 				difference() {
-   					cylinder(r=exRadius, h=height, center=true);
-			   	   cylinder(r=inRadius, h=height, center=true);
+						cylinder(r=exRadius, h=height, center=true);
+						cylinder(r=inRadius, h=height, center=true);
 				}
 
-         snaps(midRadius,-0.2);
+				snaps(midRadius,-0.2);
 		}
 	}
 
 	module microscopeAdapter() {
-      clearance = 1;
+		clearance = 1;
 		inDiameter = 28+clearance;
 		exDiameter = 36;
 		cylindricAdapter(r_from_dia(inDiameter),r_from_dia(exDiameter),height=20);
@@ -58,23 +58,23 @@ module piCameraMicroscopeAdapter()
 	}
 
 	module chipOpening() {
-      c = 2;
+		c = 2;
 		translate([0,-9.5,0])
 			cube(size=[8+c,10+c,4],center=true);
 	}
 
 	module lensOpening() {
-      c = 2;
+		c = 2;
 		translate([0,0,-2.5])
 			cube(size=[8+c,8+c,5], center=true);
 	}
 
- 	module boardOpening() {
+	module boardOpening() {
 		translate([0,-3,2.5])
 			cube(size=[25,25,5], center=true);
 	}
 
-   module cameraFrame() {
+	module cameraFrame() {
 		translate([0,-0.5,0])
 			cube(size=[40,40,10], center=true);
 	}
@@ -89,7 +89,7 @@ module piCameraMicroscopeAdapter()
 					cableOpening();
 					chipOpening();
 				}
-      snaps(16,0.2);
+			snaps(16,0.2);
 	}
   }
 
