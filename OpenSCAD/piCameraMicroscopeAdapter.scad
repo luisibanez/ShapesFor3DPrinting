@@ -58,7 +58,7 @@ module piCameraMicroscopeAdapter()
 	}
 
 	module chipOpening() {
-		clearance = 1.0;
+		clearance = 0.5;
 		c = 2 * clearance;
 		translate([0,-9.5,0])
 			cube(size=[8+c,10+c,4],center=true);
