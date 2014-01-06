@@ -5,7 +5,7 @@ module piCameraMicroscopeAdapter()
 
 	union() {
 		piCameraAdapter();
-		piCameraBackCover(0.0);
+//		piCameraBackCover(0.2);
 //		microscopeAdapter();
 //		telescopeAdapter();
 	}
@@ -59,7 +59,9 @@ module piCameraMicroscopeAdapter()
 				[ 0, 4, 3 ],
 				[ 1, 2, 5 ],
 				[ 2, 3, 4 ],
-				[ 2, 4, 5 ]
+				[ 2, 4, 5 ],
+				[ 0, 2, 1 ],
+				[ 0, 3, 2 ]
 			]
 		);
 	}
@@ -73,7 +75,7 @@ module piCameraMicroscopeAdapter()
 	}
 
 	module piCameraBackCover(clearance) {
-		c = clearance;
+		c = 2*clearance;
 		translate([0,-5.5,24])
 			union() {
 				piCameraBackCoverBevels(clearance);
