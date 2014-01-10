@@ -5,7 +5,7 @@ module piCameraMicroscopeAdapter()
 
 	union() {
 		piCameraAdapter();
-//		piCameraBackCover(-0.2);
+//		piCameraBackCover(0.1);
 //		microscopeAdapter();
 //		telescopeAdapter();
 	}
